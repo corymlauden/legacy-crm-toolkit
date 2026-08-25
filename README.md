@@ -1,12 +1,13 @@
-# qr-flyer-pipeline
+# legacy-crm-toolkit
 
-Print-ready marketing flyers, generated end to end: swap a business logo and a
-per-record QR code into a Word template without disturbing any of its fixed copy,
-then render a PDF for printing.
+Tools extracted from automation built around a CRM that exposes **no API at
+all**. The job shown here: print-ready marketing flyers, generated end to end —
+swap a business logo and a per-record QR code into a Word template without
+disturbing any of its fixed copy, then render a PDF for printing.
 
-Built to replace a six-step manual workflow that ran several times a week — create
-the record, generate its QR, find a logo, rebuild the document, check it, print it —
-against a CRM that exposes **no API at all**.
+Built to replace a six-step manual workflow that ran several times a week:
+create the record, generate its QR, find a logo, rebuild the document, check
+it, print it.
 
 ```bash
 python3 tools/qr_from_grid.py --grid grid.txt --out qr.png
