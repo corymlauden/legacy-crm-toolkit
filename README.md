@@ -5,16 +5,31 @@ Our CRM has no API. None. Records get created through the browser or not at
 all, images only come out through a capped text channel, and Word documents
 quietly undo your edits when you swap their images.
 
-All of it came out of a production pipeline that took a six-step weekly job
-down to one command.
+All of it came out of a production layer that treats the CRM like it has an
+API, even though it doesn't. It runs in both directions.
 
-```bash
-python3 tools/qr_from_grid.py --grid grid.txt --out qr.png
-python3 tools/text_logo.py --name "Mandarin Wok" --tagline "Authentic Chinese" \
-    --city "Reading, PA" --palette red --out logo.png
-python3 tools/build_flyer.py --name "Mandarin Wok" --logo logo.png --qr qr.png \
-    --template template.docx --outdir ./out
-```
+## Reading and writing a CRM with no API
+
+Getting data out. Contact records and lead history come out through the
+browser, read the way a person would read them, at a scale a person
+wouldn't. That's how the aged backlog that feeds our calling platform got
+out of the CRM in the first place.
+
+Putting data back. After every AI call the outcome gets entered
+automatically. Disposition, notes, callback windows. Booked appointments get
+created in the CRM. Wrong numbers get corrected, dead ones marked,
+do-not-call flags set. New records get created for the lead program. Nobody
+types up call results anymore.
+
+The rule underneath both directions: never trust the app to behave, verify
+that every write actually landed, and design for the failure you can't see.
+A record that silently didn't save is worse than an error message.
+
+The calling platform this feeds has its own writeup:
+[voice-agent-production-notes](https://github.com/corymlauden/voice-agent-production-notes).
+What's published in this repo is the extractable slice of the toolchain,
+from the lead program side: one command that used to be a six-step weekly
+job.
 
 ---
 
@@ -79,6 +94,14 @@ overflows no matter how long the name is. Predictable beats clever here.
 | `tools/text_logo.py` | Generates a branded text wordmark for businesses without a logo. Four palettes, auto-fitting type. |
 
 Run any of them with `-h` for arguments.
+
+```bash
+python3 tools/qr_from_grid.py --grid grid.txt --out qr.png
+python3 tools/text_logo.py --name "Mandarin Wok" --tagline "Authentic Chinese" \
+    --city "Reading, PA" --palette red --out logo.png
+python3 tools/build_flyer.py --name "Mandarin Wok" --logo logo.png --qr qr.png \
+    --template template.docx --outdir ./out
+```
 
 ## Requirements
 
